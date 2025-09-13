@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Elegant Pink Hijab",
+    "price": "2500",
+    "image": "images/pink-hijab.jpg",
+    "description": "Playful yet elegant hijab perfect for any occasion.",
+    "paymentLink": "https://flutterwave.com/pay/xxxx"
+  },
+  {
+    "id": 2,
+    "name": "Classic Black Hijab",
+    "price": "3000",
+    "image": "images/black-hijab.jpg",
+    "description": "Stylish hijab suitable for daily wear.",
+    "paymentLink": "https://flutterwave.com/pay/yyyy"
+  },
+  {
+    "id": 3,
+    "name": "Vibrant Blue Hijab",
+    "price": "2800",
+    "image": "images/blue-hijab.jpg",
+    "description": "Perfect for adding a pop of color to your outfit.",
+    "paymentLink": "https://flutterwave.com/pay/zzzz"
+  }
+]
