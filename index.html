@@ -1,12 +1,60 @@
-<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hijab Store 🌸</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Quick inline styles for emojis & buttons */
+    .cta-button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+    }
 
-  <!-- 3D Character Canvas -->
-  <div id="character-container" style="position:relative; width:100%; height:400px; pointer-events:none;"></div>
+    .social-buttons a, .whatsapp-button {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 12px;
+      border-radius: 50px;
+      background-color: #f0f0f0;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .social-buttons a:hover, .whatsapp-button:hover {
+      background-color: #ff69b4;
+      color: white;
+    }
+
+    .avatar {
+      font-size: 60px;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    /* 3D character container */
+    #character-container {
+      width: 100%;
+      height: 500px; /* Adjust height as needed */
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
 
   <!-- HEADER -->
   <header>
     <nav>
-      <span class="avatar">🤗</span> <!-- fallback avatar -->
+      <span class="avatar">🤗</span> <!-- Tripo-like personal avatar -->
       <a href="index.html" class="logo">HijabStore</a>
       <ul class="nav-links">
         <li>🏠 <a href="index.html">Home</a></li>
@@ -15,12 +63,15 @@
         <li>📞 <a href="contact.html">Contact</a></li>
       </ul>
       <div class="social-buttons">
-        <a href="https://instagram.com/khadijamuhammadaliyu6" target="_blank">📸 Instagram</a>
-        <a href="https://www.tiktok.com/@babyhadiza46" target="_blank">🎵 TikTok</a>
-        <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 WhatsApp</a>
+        <a href="https://instagram.com/khadijamuhammadaliyu6?igsh=ZGUzMzM3NWJiOQ==" target="_blank">📸 Instagram</a>
+        <a href="https://www.tiktok.com/@babyhadiza46?_t=ZS-8zgyGuoSfD8&_r=1" target="_blank">🎵 TikTok</a>
+        <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 Click to WhatsApp</a>
       </div>
     </nav>
   </header>
+
+  <!-- 3D INTERACTIVE CHARACTER -->
+  <div id="character-container"></div>
 
   <!-- HERO SECTION -->
   <section id="hero">
@@ -32,99 +83,112 @@
   <!-- FEATURED PRODUCTS -->
   <section id="featured-products">
     <h2>Featured Hijabs 🌟</h2>
-    <div class="product-grid" id="product-grid"></div>
+    <div class="product-grid" id="product-grid">
+      <!-- Products loaded dynamically from js/main.js -->
+    </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <p>&copy; 2025 HijabStore. All rights reserved. 💕</p>
     <div class="social-buttons">
-      <a href="https://instagram.com/khadijamuhammadaliyu6" target="_blank">📸 Instagram</a>
-      <a href="https://www.tiktok.com/@babyhadiza46" target="_blank">🎵 TikTok</a>
+      <a href="https://instagram.com/khadijamuhammadaliyu6?igsh=ZGUzMzM3NWJiOQ==" target="_blank">📸 Instagram</a>
+      <a href="https://www.tiktok.com/@babyhadiza46?_t=ZS-8zgyGuoSfD8&_r=1" target="_blank">🎵 TikTok</a>
       <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 WhatsApp</a>
     </div>
   </footer>
 
-  <!-- JS -->
+  <!-- MAIN JS -->
   <script src="js/main.js"></script>
 
-  <!-- Three.js Interactive Character -->
+  <!-- THREE.JS 3D CHARACTER EMBED -->
   <script type="module">
     import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
     import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
     import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
+    // Scene setup
     const container = document.getElementById('character-container');
     const scene = new THREE.Scene();
-
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-    camera.position.set(0, 1.7, 3);
-
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
+    // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enablePan = false;
     controls.enableZoom = false;
-    controls.target.set(0, 1.7, 0);
+    controls.enableDamping = true;
 
-    const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-    scene.add(light);
+    // Lighting
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+    scene.add(hemiLight);
 
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(5, 10, 7.5);
+    scene.add(dirLight);
+
+    // Load character
     const loader = new GLTFLoader();
     let character, mixer, actions = {};
-
-    loader.load('Stylized_Interactive_Male_Character.glb', function(gltf) {
+    loader.load('Stylized_Interactive_Male_Character.glb', (gltf) => {
       character = gltf.scene;
       scene.add(character);
 
       mixer = new THREE.AnimationMixer(character);
       gltf.animations.forEach(clip => {
         actions[clip.name] = mixer.clipAction(clip);
-        if (clip.name.startsWith('idle')) {
-          actions[clip.name].play();
-        }
+        if(clip.name.includes('idle')) actions[clip.name].play(); // play idle animations
       });
     });
 
+    camera.position.set(0, 1.7, 3);
+
+    // Interaction
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
-    function onMouseMove(event) {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
+    container.addEventListener('mousemove', (event) => {
+      mouse.x = (event.clientX / container.clientWidth) * 2 - 1;
+      mouse.y = -(event.clientY / container.clientHeight) * 2 + 1;
       raycaster.setFromCamera(mouse, camera);
-      if (!character) return;
-      const intersects = raycaster.intersectObject(character, true);
-      if (intersects.length > 0 && actions['wave_right_hand']) {
-        actions['wave_right_hand'].reset().play();
+      if(character){
+        const intersects = raycaster.intersectObject(character, true);
+        if(intersects.length > 0 && actions['wave_right_hand']){
+          actions['wave_right_hand'].reset().play();
+        }
       }
-    }
+    });
 
-    function onClick(event) {
-      // Optional: add interactions on click
-    }
+    container.addEventListener('click', (event) => {
+      mouse.x = (event.clientX / container.clientWidth) * 2 - 1;
+      mouse.y = -(event.clientY / container.clientHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      if(character){
+        const intersects = raycaster.intersectObject(character, true);
+        if(intersects.length > 0 && actions['smile_friendly']){
+          actions['smile_friendly'].reset().play();
+        }
+      }
+    });
 
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('click', onClick);
-
+    // Animate
     const clock = new THREE.Clock();
-
     function animate() {
       requestAnimationFrame(animate);
       if(mixer) mixer.update(clock.getDelta());
+      controls.update();
       renderer.render(scene, camera);
     }
-
     animate();
 
+    // Responsive
     window.addEventListener('resize', () => {
       camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(container.clientWidth, container.clientHeight);
     });
   </script>
-
-  </body>
+</body>
+</html>
