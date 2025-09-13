@@ -15,9 +15,9 @@
         <li>📞 <a href="contact.html">Contact</a></li>
       </ul>
       <div class="social-buttons">
-        <a href="https://instagram.com/khadijamuhammadaliyu6?igsh=ZGUzMzM3NWJiOQ==" target="_blank">📸 Instagram</a>
-        <a href="https://www.tiktok.com/@babyhadiza46?_t=ZS-8zgyGuoSfD8&_r=1" target="_blank">🎵 TikTok</a>
-        <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 Click to WhatsApp</a>
+        <a href="https://instagram.com/khadijamuhammadaliyu6" target="_blank">📸 Instagram</a>
+        <a href="https://www.tiktok.com/@babyhadiza46" target="_blank">🎵 TikTok</a>
+        <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 WhatsApp</a>
       </div>
     </nav>
   </header>
@@ -39,8 +39,8 @@
   <footer>
     <p>&copy; 2025 HijabStore. All rights reserved. 💕</p>
     <div class="social-buttons">
-      <a href="https://instagram.com/khadijamuhammadaliyu6?igsh=ZGUzMzM3NWJiOQ==" target="_blank">📸 Instagram</a>
-      <a href="https://www.tiktok.com/@babyhadiza46?_t=ZS-8zgyGuoSfD8&_r=1" target="_blank">🎵 TikTok</a>
+      <a href="https://instagram.com/khadijamuhammadaliyu6" target="_blank">📸 Instagram</a>
+      <a href="https://www.tiktok.com/@babyhadiza46" target="_blank">🎵 TikTok</a>
       <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 WhatsApp</a>
     </div>
   </footer>
@@ -88,7 +88,6 @@
       });
     });
 
-    // Raycaster for hover/click interactions
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
@@ -105,33 +104,27 @@
     }
 
     function onClick(event) {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      raycaster.setFromCamera(mouse, camera);
-      if (!character) return;
-      const intersects = raycaster.intersectObject(character, true);
-      if (intersects.length > 0 && actions['smile_friendly']) {
-        actions['smile_friendly'].reset().play();
-      }
+      // Optional: add interactions on click
     }
 
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('click', onClick);
 
+    const clock = new THREE.Clock();
+
     function animate() {
       requestAnimationFrame(animate);
-      if (mixer) mixer.update(0.016);
+      if(mixer) mixer.update(clock.getDelta());
       renderer.render(scene, camera);
     }
 
     animate();
 
-    // Handle resizing
     window.addEventListener('resize', () => {
       camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(container.clientWidth, container.clientHeight);
     });
   </script>
-        </body>
+
+  </body>
