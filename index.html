@@ -40,15 +40,6 @@
       display: inline-block;
       margin-right: 10px;
     }
-
-    /* Container for 3D character */
-    #threejs-character {
-      width: 100%;
-      height: 450px;
-      display: block;
-      margin: 0 auto;
-      border-bottom: 2px solid #ff69b4;
-    }
   </style>
 </head>
 <body>
@@ -56,7 +47,7 @@
   <!-- HEADER -->
   <header>
     <nav>
-      <span class="avatar">🤗</span>
+      <span class="avatar">🤗</span> <!-- Tripo-like personal avatar -->
       <a href="index.html" class="logo">HijabStore</a>
       <ul class="nav-links">
         <li>🏠 <a href="index.html">Home</a></li>
@@ -71,9 +62,6 @@
       </div>
     </nav>
   </header>
-
-  <!-- 3D Interactive Character Section -->
-  <div id="threejs-character"></div>
 
   <!-- HERO SECTION -->
   <section id="hero">
@@ -101,100 +89,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-
-  <!-- Three.js 3D Character Embed -->
-  <script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
-    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
-
-    const container = document.getElementById('threejs-character');
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enablePan = false;
-    controls.enableZoom = false;
-    controls.target.set(0, 1.7, 0);
-
-    const loader = new GLTFLoader();
-    let character, mixer, actions = {};
-
-    loader.load('Stylized_Interactive_Male_Character.glb', function(gltf) {
-      character = gltf.scene;
-      character.position.set(0,0,0);
-      character.scale.set(1,1,1);
-      scene.add(character);
-
-      mixer = new THREE.AnimationMixer(character);
-
-      gltf.animations.forEach(clip => {
-        actions[clip.name] = mixer.clipAction(clip);
-        if(clip.name.startsWith('idle')) actions[clip.name].play();
-      });
-    });
-
-    camera.position.set(0, 1.7, 3);
-
-    const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-    scene.add(light);
-
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-
-    function triggerAnimation(name) {
-      if(actions[name]) {
-        actions[name].reset().play();
-      }
-    }
-
-    window.addEventListener('mousemove', (event) => {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-      if(!character) return;
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObject(character, true);
-      if(intersects.length > 0) triggerAnimation('wave_right_hand');
-    });
-
-    window.addEventListener('click', (event) => {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-      if(!character) return;
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObject(character, true);
-      if(intersects.length > 0) triggerAnimation('smile_friendly');
-    });
-
-    function animate() {
-      requestAnimationFrame(animate);
-      if(mixer) mixer.update(0.016);
-      renderer.render(scene, camera);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
-    });
-  </script>
-</body>
-</html>  <section id="featured-products">
-    <h2>Featured Hijabs 🌟</h2>
-    <div class="bento-container" id="product-grid">
-      <!-- Products loaded dynamically or statically -->
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 HijabStore 💕</p>
-  </footer>
 </body>
 </html>
