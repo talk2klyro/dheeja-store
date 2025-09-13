@@ -6,29 +6,48 @@
   <title>Hijab Store 🌸</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Hero & top character container */
-    #top-character-container {
+    /* Quick inline styles for emojis & buttons */
+    .cta-button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .social-buttons a, .whatsapp-button {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 12px;
+      border-radius: 50px;
+      background-color: #f0f0f0;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .social-buttons a:hover, .whatsapp-button:hover {
+      background-color: #ff69b4;
+      color: white;
+    }
+
+    .avatar {
+      font-size: 60px;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    /* Container for 3D character */
+    #threejs-character {
       width: 100%;
-      height: 400px; /* adjust as needed */
-      position: relative;
-      overflow: hidden;
-      background: #fef0f5; /* subtle background behind the character */
-    }
-
-    /* Overlay content over the 3D character if needed */
-    #hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      color: #ff69b4;
-      z-index: 1;
-    }
-
-    /* Three.js canvas */
-    canvas {
+      height: 450px;
       display: block;
+      margin: 0 auto;
+      border-bottom: 2px solid #ff69b4;
     }
   </style>
 </head>
@@ -48,100 +67,126 @@
       <div class="social-buttons">
         <a href="https://instagram.com/khadijamuhammadaliyu6?igsh=ZGUzMzM3NWJiOQ==" target="_blank">📸 Instagram</a>
         <a href="https://www.tiktok.com/@babyhadiza46?_t=ZS-8zgyGuoSfD8&_r=1" target="_blank">🎵 TikTok</a>
-        <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 WhatsApp</a>
+        <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 Click to WhatsApp</a>
       </div>
     </nav>
   </header>
 
-  <!-- TOP 3D CHARACTER SECTION -->
-  <section id="top-character-container">
-    <div id="hero-content">
-      <h1>Welcome to HijabStore 🌸✨</h1>
-      <p>Shop our exclusive hijab collection today!</p>
-      <a href="shop.html" class="cta-button">🛍️ Shop Now</a>
-    </div>
+  <!-- 3D Interactive Character Section -->
+  <div id="threejs-character"></div>
 
-    <!-- Three.js 3D Character -->
-    <script type="module">
-      import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-      import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
-      import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
-
-      const container = document.getElementById('top-character-container');
-      const scene = new THREE.Scene();
-
-      const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      container.appendChild(renderer.domElement);
-
-      const controls = new OrbitControls(camera, renderer.domElement);
-      controls.enablePan = false;
-      controls.enableZoom = false;
-      controls.target.set(0, 1.7, 0);
-
-      const loader = new GLTFLoader();
-      let character, mixer;
-      loader.load('Stylized_Interactive_Male_Character.glb', function(gltf) {
-        character = gltf.scene;
-        scene.add(character);
-        mixer = new THREE.AnimationMixer(character);
-        gltf.animations.forEach(clip => {
-          mixer.clipAction(clip).play();
-        });
-      });
-
-      camera.position.set(0, 1.7, 3);
-
-      const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-      scene.add(light);
-
-      const raycaster = new THREE.Raycaster();
-      const mouse = new THREE.Vector2();
-
-      window.addEventListener('mousemove', (event) => {
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        if (!character) return;
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObject(character, true);
-        if (intersects.length > 0 && mixer) {
-          const wave = mixer.clipAction('wave_right_hand');
-          if (wave) wave.reset().play();
-        }
-      });
-
-      window.addEventListener('click', (event) => {
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        if (!character) return;
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObject(character, true);
-        if (intersects.length > 0 && mixer) {
-          const smile = mixer.clipAction('smile_friendly');
-          if (smile) smile.reset().play();
-        }
-      });
-
-      function animate() {
-        requestAnimationFrame(animate);
-        if (mixer) mixer.update(0.016);
-        renderer.render(scene, camera);
-      }
-
-      animate();
-
-      // Handle resize
-      window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-      });
-    </script>
+  <!-- HERO SECTION -->
+  <section id="hero">
+    <h1>Discover Playful & Elegant Hijabs 🌸✨</h1>
+    <p>Shop our exclusive collection today! 💖</p>
+    <a href="shop.html" class="cta-button">🛍️ Shop Now</a>
   </section>
 
-  <!-- FEATURED PRODUCTS (can use Bento layout here) -->
+  <!-- FEATURED PRODUCTS -->
   <section id="featured-products">
+    <h2>Featured Hijabs 🌟</h2>
+    <div class="product-grid" id="product-grid">
+      <!-- Products loaded dynamically from js/main.js -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 HijabStore. All rights reserved. 💕</p>
+    <div class="social-buttons">
+      <a href="https://instagram.com/khadijamuhammadaliyu6?igsh=ZGUzMzM3NWJiOQ==" target="_blank">📸 Instagram</a>
+      <a href="https://www.tiktok.com/@babyhadiza46?_t=ZS-8zgyGuoSfD8&_r=1" target="_blank">🎵 TikTok</a>
+      <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 WhatsApp</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+
+  <!-- Three.js 3D Character Embed -->
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+
+    const container = document.getElementById('threejs-character');
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enablePan = false;
+    controls.enableZoom = false;
+    controls.target.set(0, 1.7, 0);
+
+    const loader = new GLTFLoader();
+    let character, mixer, actions = {};
+
+    loader.load('Stylized_Interactive_Male_Character.glb', function(gltf) {
+      character = gltf.scene;
+      character.position.set(0,0,0);
+      character.scale.set(1,1,1);
+      scene.add(character);
+
+      mixer = new THREE.AnimationMixer(character);
+
+      gltf.animations.forEach(clip => {
+        actions[clip.name] = mixer.clipAction(clip);
+        if(clip.name.startsWith('idle')) actions[clip.name].play();
+      });
+    });
+
+    camera.position.set(0, 1.7, 3);
+
+    const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+    scene.add(light);
+
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    function triggerAnimation(name) {
+      if(actions[name]) {
+        actions[name].reset().play();
+      }
+    }
+
+    window.addEventListener('mousemove', (event) => {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      if(!character) return;
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObject(character, true);
+      if(intersects.length > 0) triggerAnimation('wave_right_hand');
+    });
+
+    window.addEventListener('click', (event) => {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      if(!character) return;
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObject(character, true);
+      if(intersects.length > 0) triggerAnimation('smile_friendly');
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if(mixer) mixer.update(0.016);
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+  </script>
+</body>
+</html>  <section id="featured-products">
     <h2>Featured Hijabs 🌟</h2>
     <div class="bento-container" id="product-grid">
       <!-- Products loaded dynamically or statically -->
