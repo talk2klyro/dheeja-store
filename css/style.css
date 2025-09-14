@@ -1,134 +1,241 @@
-/* -------------------- Global Reset -------------------- */
+/* Reset & Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
 }
+
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f5f6fa;
+  background: #fff;
   color: #333;
 }
 
-/* -------------------- Navbar & Dropdown -------------------- */
-.navbar {
-  display: flex;
-  justify-content: flex-end;
+/* HEADER */
+header {
+  background: #fff;
   padding: 1rem 2rem;
-  background: #2c3e50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-.dropdown {
+
+nav .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav .nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav .nav-links a:hover,
+nav .nav-links .active {
+  color: #ff4081;
+}
+
+/* Drop-down menu */
+.nav-links li {
   position: relative;
 }
-.dropbtn {
-  background: #3498db;
-  color: #fff;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-.dropbtn:hover { background: #2980b9; }
-.dropdown-content {
+
+.nav-links li ul {
   display: none;
   position: absolute;
-  right: 0;
-  top: calc(100% + 8px);
+  top: 100%;
+  left: 0;
   background: #fff;
-  min-width: 160px;
-  border-radius: 6px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  overflow: hidden;
-  z-index: 100;
+  border: 1px solid #ddd;
+  list-style: none;
+  padding: 0.5rem 0;
+  min-width: 150px;
+  border-radius: 5px;
 }
-.dropdown-content a {
+
+.nav-links li:hover ul {
   display: block;
-  padding: 10px 14px;
+}
+
+.nav-links li ul li a {
+  display: block;
+  padding: 0.5rem 1rem;
   color: #333;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.dropdown-content a:hover { background: #f1f1f1; }
-.dropdown:hover .dropdown-content { display: block; }
-
-/* -------------------- Bento Layout -------------------- */
-.bento-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
-  padding: 20px;
-}
-.bento-item {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.bento-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-}
-.bento-large {
-  grid-column: span 2;
-  grid-row: span 2;
 }
 
-/* -------------------- Snap Gallery -------------------- */
-.gallery-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-}
-.gallery {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-.gallery::-webkit-scrollbar { display: none; }
-.gallery-item {
-  flex: 0 0 100%;
-  height: 250px;
-  scroll-snap-align: start;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: bold;
+.nav-links li ul li a:hover {
+  background: #ff4081;
   color: #fff;
+}
+
+/* HERO */
+#hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 6rem 1rem;
+  background: url('../images/hero-bg.jpg') no-repeat center/cover;
+  color: #fff;
+}
+
+#hero h1 {
+  font-size: 2.8rem;
+  animation: fadeIn 2s ease-in-out;
+}
+
+#hero p {
+  font-size: 1.3rem;
+  margin: 1rem 0 2rem;
+}
+
+.cta-button {
+  padding: 0.8rem 1.5rem;
+  background: #ff4081;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
   transition: transform 0.3s;
 }
-.gallery-item:nth-child(1) { background: #e74c3c; }
-.gallery-item:nth-child(2) { background: #9b59b6; }
-.gallery-item:nth-child(3) { background: #27ae60; }
-.gallery-item:nth-child(4) { background: #f39c12; }
 
-/* Hover effect for gallery */
-.gallery-item:hover { transform: scale(1.05); }
-
-/* -------------------- Progress Bar -------------------- */
-.progress-bar {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  height: 6px;
-  background: rgba(255,255,255,0.4);
-  border-radius: 3px;
-  overflow: hidden;
+.cta-button:hover {
+  transform: scale(1.05);
 }
-.progress {
-  height: 100%;
-  width: 0;
+
+/* BENTO GRID - FEATURED & PRODUCTS */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 3rem 2rem;
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+}
+
+.product-card {
   background: #fff;
-  transition: width 0.25s ease;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  scroll-snap-align: start;
+  cursor: pointer;
 }
 
-/* -------------------- Responsive Enhancements -------------------- */
-@media (max-width: 768px) {
-  .bento-large { grid-column: span 1; grid-row: span 1; }
-  .gallery-item { font-size: 1.5rem; height: 180px; }
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: transform 0.5s;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Animated Progress Bar */
+.product-card::after {
+  content: '';
+  display: block;
+  height: 4px;
+  background: #ff4081;
+  width: 0;
+  transition: width 0.5s ease-in-out;
+  border-radius: 2px;
+}
+
+.product-card:hover::after {
+  width: 100%;
+}
+
+/* HERO AND ABOUT PREVIEW */
+#about-preview {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: #f5f5f5;
+}
+
+#about-preview h2 {
+  color: #ff4081;
+  margin-bottom: 1rem;
+}
+
+#about-preview p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.social-buttons a {
+  color: #fff;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-buttons a:hover {
+  color: #ff4081;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+  #hero h1 {
+    font-size: 2rem;
+  }
+  }
