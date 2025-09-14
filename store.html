@@ -1,13 +1,14 @@
-<!DOCT<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop Hijabs</title>
+  <title>Shop Hijabs - HijabStore</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
     <nav>
       <a href="index.html" class="logo">HijabStore</a>
@@ -25,6 +26,25 @@
     </nav>
   </header>
 
+  <!-- FILTERS -->
+  <section id="shop-filters" class="filters">
+    <label>Filter by Category:</label>
+    <select id="category-filter">
+      <option value="all">All</option>
+      <option value="Elegant">Elegant</option>
+      <option value="Classic">Classic</option>
+      <option value="Trendy">Trendy</option>
+    </select>
+
+    <label>Sort by Price:</label>
+    <select id="price-sort">
+      <option value="default">Default</option>
+      <option value="asc">Low to High</option>
+      <option value="desc">High to Low</option>
+    </select>
+  </section>
+
+  <!-- PRODUCT GRID -->
   <main>
     <section id="shop-products">
       <h2>Our Collection</h2>
@@ -34,6 +54,19 @@
     </section>
   </main>
 
+  <!-- MODAL -->
+  <div id="product-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img id="modal-image" src="" alt="">
+      <h3 id="modal-name"></h3>
+      <p id="modal-description"></p>
+      <p id="modal-price"></p>
+      <a id="modal-buy" href="#" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
     <p>&copy; 2025 HijabStore. All rights reserved.</p>
     <div class="social-buttons">
