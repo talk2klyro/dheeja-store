@@ -1,70 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HijabStore - Playful & Elegant Hijabs</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HijabStore - Playful & Elegant Hijabs</title>
+<style>
+/* ===== Reset & Base ===== */
+* {margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{line-height:1.6;color:#333;scroll-behavior:smooth;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+
+/* ===== Header ===== */
+header{
+  background:#fff;padding:1rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid #ddd;position:sticky;top:0;z-index:100;
+  flex-wrap:wrap;
+}
+.logo{font-size:1.8rem;font-weight:bold;color:#ff4081;}
+nav .nav-links{list-style:none;display:flex;gap:1.5rem;flex-wrap:wrap;}
+nav .nav-links a{color:#333;transition:color 0.3s;}
+nav .nav-links a.active, nav .nav-links a:hover{color:#ff4081;}
+.social-buttons a{margin-left:0.5rem;font-size:0.9rem;transition:color 0.3s;}
+.social-buttons a:hover{color:#ff4081;}
+
+/* ===== Hero Section ===== */
+#hero{
+  display:flex;justify-content:center;align-items:center;text-align:center;
+  padding:5rem 1rem;background:url('https://i.imgur.com/yQzXfpt.jpg') no-repeat center/cover;
+  color:#fff;flex-direction:column;
+}
+#hero h1{font-size:2.5rem;margin-bottom:1rem;animation:fadeIn 2s ease-in-out;}
+#hero p{font-size:1.2rem;margin-bottom:2rem;}
+.cta-button{padding:0.8rem 1.5rem;background:#ff4081;color:#fff;border-radius:5px;transition:transform 0.3s;}
+.cta-button:hover{transform:scale(1.05);}
+
+/* ===== Filters ===== */
+.filters{display:flex;justify-content:center;align-items:center;gap:1rem;padding:2rem;flex-wrap:wrap;}
+.filters label{font-weight:bold;}
+.filters select{padding:0.5rem;border-radius:5px;border:1px solid #ddd;}
+
+/* ===== Products ===== */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;padding:2rem;}
+.product-card{border:1px solid #ddd;padding:1rem;text-align:center;transition:transform 0.3s,box-shadow 0.3s;background:#fff;border-radius:8px;}
+.product-card:hover{transform:scale(1.05);box-shadow:0 5px 15px rgba(0,0,0,0.2);}
+.product-card h3{margin:0.5rem 0;}
+.product-card p{margin-bottom:1rem;}
+.buy-button{padding:0.5rem 1rem;background:#ff4081;color:#fff;border:none;border-radius:5px;cursor:pointer;transition:transform 0.3s;}
+.buy-button:hover{transform:scale(1.05);}
+
+/* ===== About Section ===== */
+#about-preview{padding:4rem 2rem;text-align:center;background:#f5f5f5;}
+#about-preview h2{color:#ff4081;margin-bottom:1rem;}
+#about-preview p{max-width:600px;margin:0 auto 2rem auto;}
+
+/* ===== Modal ===== */
+.modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.7);}
+.modal-content{background:#fff;margin:5% auto;padding:2rem;width:90%;max-width:500px;border-radius:8px;text-align:center;position:relative;}
+.modal-content img{margin-bottom:1rem;}
+.modal .close{position:absolute;right:20px;top:10px;font-size:2rem;cursor:pointer;}
+
+/* ===== Footer ===== */
+footer{background:#222;color:#fff;text-align:center;padding:2rem 1rem;}
+footer .social-buttons a{margin-left:0.5rem;color:#fff;}
+footer .social-buttons a:hover{color:#ff4081;}
+
+/* ===== Animations ===== */
+@keyframes fadeIn{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+  header{flex-direction:column;gap:1rem;}
+  .product-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+  .filters{flex-direction:column;align-items:center;}
+}
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <nav>
-      <a href="index.html" class="logo">HijabStore</a>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="shop.html">Shop</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="social-buttons">
-        <a href="https://instagram.com/" target="_blank">Instagram</a>
-        <a href="https://facebook.com/" target="_blank">Facebook</a>
-        <a href="https://tiktok.com/" target="_blank">TikTok</a>
-      </div>
-    </nav>
-  </header>
+<!-- HEADER -->
+<header>
+  <a href="#hero" class="logo">HijabStore</a>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#hero" class="active">Home</a></li>
+      <li><a href="#shop-section">Shop</a></li>
+      <li><a href="#about-preview">About</a></li>
+      <li><a href="#contact-preview">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="social-buttons">
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
+    <a href="https://facebook.com/" target="_blank">Facebook</a>
+    <a href="https://tiktok.com/" target="_blank">TikTok</a>
+  </div>
+</header>
 
-  <!-- HERO SECTION -->
-  <section id="hero">
-    <div class="hero-content">
-      <h1>Discover Playful & Elegant Hijabs</h1>
-      <p>Shop our exclusive collection today!</p>
-      <a href="shop.html" class="cta-button">Shop Now</a>
-    </div>
-  </section>
+<!-- HERO -->
+<section id="hero">
+  <h1>Discover Playful & Elegant Hijabs</h1>
+  <p>Shop our exclusive collection today!</p>
+  <a href="#shop-section" class="cta-button">Shop Now</a>
+</section>
 
-  <!-- FEATURED PRODUCTS -->
-  <section id="featured-products">
-    <h2>Featured Hijabs</h2>
-    <div class="product-grid" id="product-grid">
-      <!-- Products will be dynamically loaded from JSON -->
-    </div>
-    <div class="view-all">
-      <a href="shop.html" class="cta-button">View All Products</a>
-    </div>
-  </section>
+<!-- SHOP WITH FILTERS -->
+<section id="shop-section">
+  <h2 style="text-align:center;color:#ff4081;margin-top:2rem;">Our Collection</h2>
+  <div class="filters">
+    <label for="category-filter">Category:</label>
+    <select id="category-filter">
+      <option value="all">All</option>
+      <option value="Elegant">Elegant</option>
+      <option value="Classic">Classic</option>
+      <option value="Trendy">Trendy</option>
+    </select>
+    <label for="price-sort">Sort by Price:</label>
+    <select id="price-sort">
+      <option value="default">Default</option>
+      <option value="asc">Low to High</option>
+      <option value="desc">High to Low</option>
+    </select>
+  </div>
+  <div class="product-grid" id="product-grid"></div>
+</section>
 
-  <!-- ABOUT PREVIEW -->
-  <section id="about-preview">
-    <h2>About HijabStore</h2>
-    <p>Our mission is to provide high-quality, stylish hijabs that empower women to express themselves confidently. Playful, elegant, and perfect for any occasion.</p>
-    <a href="about.html" class="cta-button">Learn More</a>
-  </section>
+<!-- ABOUT -->
+<section id="about-preview">
+  <h2>About HijabStore</h2>
+  <p>Our mission is to provide high-quality, stylish hijabs that empower women to express themselves confidently. Playful, elegant, and perfect for any occasion.</p>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 HijabStore. All rights reserved.</p>
-    <div class="social-buttons">
-      <a href="https://instagram.com/" target="_blank">Instagram</a>
-      <a href="https://facebook.com/" target="_blank">Facebook</a>
-      <a href="https://tiktok.com/" target="_blank">TikTok</a>
-    </div>
-  </footer>
+<!-- CONTACT -->
+<section id="contact-preview" style="padding:4rem 2rem;text-align:center;">
+  <h2>Contact HijabStore</h2>
+  <p>Email: support@hijabstore.com | Phone: +234 800 123 4567</p>
+  <div class="social-buttons">
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
+    <a href="https://facebook.com/" target="_blank">Facebook</a>
+    <a href="https://tiktok.com/" target="_blank">TikTok</a>
+  </div>
+</section>
 
-  <!-- JS -->
-  <script src="js/main.js"></script>
+<!-- MODAL -->
+<div id="product-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <img id="modal-image" src="" alt="">
+    <h3 id="modal-name"></h3>
+    <p id="modal-description"></p>
+    <p id="modal-price"></p>
+    <a id="modal-buy" href="#" class="buy-button" target="_blank">Buy Now</a>
+  </div>
+</div>
 
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 HijabStore. All rights reserved.</p>
+</footer>
+
+<!-- JS -->
+<script>
+const productsData=[
+{id:1,name:"Elegant Pink Hijab",price:2500,category:"Elegant",image:"https://i.imgur.com/pkB6KqE.jpg",description:"Playful yet elegant hijab.",paymentLink:"https://flutterwave.com/pay/xxxx"},
+{id:2,name:"Classic Black Hijab",price:3000,category:"Classic",image:"https://i.imgur.com/OS4WnXc.jpg",description:"Stylish hijab for daily wear.",paymentLink:"https://flutterwave.com/pay/yyyy"},
+{id:3,name:"Vibrant Blue Hijab",price:2800,category:"Trendy",image:"https://i.imgur.com/y3B7rZk.jpg",description:"Perfect for adding a pop of color.",paymentLink:"https://flutterwave.com/pay/zzzz"},
+{id:4,name:"Soft Beige Hijab",price:2700,category:"Elegant",image:"https://i.imgur.com/gfX5WlH.jpg",description:"Comfortable and versatile.",paymentLink:"https://flutterwave.com/pay/aaaa"}
+];
+
+// Elements
+const grid = document.getElementById('product-grid');
+const modal = document.getElementById('product-modal');
+const modalImg = document.getElementById('modal-image');
+const modalName = document.getElementById('modal-name');
+const modalDesc = document.getElementById('modal-description');
+const modalPrice = document.getElementById('modal-price');
+const modalBuy = document.getElementById('modal-buy');
+const modalClose = document.querySelector('.modal .close');
+
+const categoryFilter = document.getElementById('category-filter');
+const priceSort = document.getElementById('price-sort');
+
+// Render Products
+function renderProducts(products){
+  grid.innerHTML='';
+  products.forEach(product=>{
+    const card=document.createElement('div');
+    card.className='product-card';
+    card.innerHTML=`
+      <img data-src="${product.image}" alt="${product.name}" class="lazy">
+      <h3>${product.name}</h3>
+      <p>₦${product.price}</p>
+      <button class="buy-button" data-id="${product.id}">Buy Now</button>
+    `;
+    grid.appendChild(card);
+  });
+  lazyLoadImages();
+  attachModalEvents();
+}
+
+// Filter & Sort
+function applyFilters(){
+  let filtered=[...productsData];
+  const category=categoryFilter.value;
+  if(category!=='all') filtered=filtered.filter(p=>p.category===category);
+
+  const sort=priceSort.value;
+  if(sort==='asc') filtered.sort((a,b)=>a.price-b.price);
+  if(sort==='desc') filtered.sort((a,b)=>b.price-a.price);
+
+  renderProducts(filtered);
+}
+
+categoryFilter.addEventListener('change',applyFilters);
+priceSort.addEventListener('change',applyFilters);
+
+// Modal Events
+function attachModalEvents(){
+  const buttons=document.querySelectorAll('.buy-button');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      const id=e.target.dataset.id;
+      const product=productsData.find(p=>p.id==id);
+      if(product){
+        modalImg.src=product.image;
+        modalName.textContent=product.name;
+        modalDesc.textContent=product.description;
+        modalPrice.textContent=`₦${product.price}`;
+        modalBuy.href=product.paymentLink;
+        modal.style.display='block';
+      }
+    });
+  });
+}
+
+modalClose.onclick=()=>modal.style.display='none';
+window.onclick=e=>{if(e.target==modal) modal.style.display='none';}
+
+// Lazy Load Images
+function lazyLoadImages(){
+  const lazyImages=document.querySelectorAll('.lazy');
+  const observer=new IntersectionObserver((entries,obs)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const img=entry.target;
+        img.src=img.dataset.src;
+        img.classList.remove('lazy');
+        obs.unobserve(img);
+      }
+    });
+  },{threshold:0.1});
+  lazyImages.forEach(img=>observer.observe(img));
+}
+
+// Initial render
+renderProducts(productsData);
+</script>
 </body>
 </html>
