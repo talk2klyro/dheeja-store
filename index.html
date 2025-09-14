@@ -3,91 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hijab Store 🌸</title>
+  <title>HijabStore - Playful & Elegant Hijabs</title>
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* Quick inline styles for emojis & buttons */
-    .cta-button {
-      background-color: #ff69b4;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 10px;
-    }
-
-    .social-buttons a, .whatsapp-button {
-      display: inline-block;
-      margin: 5px;
-      padding: 8px 12px;
-      border-radius: 50px;
-      background-color: #f0f0f0;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .social-buttons a:hover, .whatsapp-button:hover {
-      background-color: #ff69b4;
-      color: white;
-    }
-
-    .avatar {
-      font-size: 60px;
-      display: inline-block;
-      margin-right: 10px;
-    }
-  </style>
 </head>
 <body>
 
   <!-- HEADER -->
   <header>
     <nav>
-      <span class="avatar">🤗</span> <!-- Tripo-like personal avatar -->
       <a href="index.html" class="logo">HijabStore</a>
       <ul class="nav-links">
-        <li>🏠 <a href="index.html">Home</a></li>
-        <li>🛍️ <a href="shop.html">Shop</a></li>
-        <li>ℹ️ <a href="about.html">About</a></li>
-        <li>📞 <a href="contact.html">Contact</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="social-buttons">
-        <a href="https://instagram.com/khadijamuhammadaliyu6?igsh=ZGUzMzM3NWJiOQ==" target="_blank">📸 Instagram</a>
-        <a href="https://www.tiktok.com/@babyhadiza46?_t=ZS-8zgyGuoSfD8&_r=1" target="_blank">🎵 TikTok</a>
-        <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 Click to WhatsApp</a>
+        <a href="https://instagram.com/" target="_blank">Instagram</a>
+        <a href="https://facebook.com/" target="_blank">Facebook</a>
+        <a href="https://tiktok.com/" target="_blank">TikTok</a>
       </div>
     </nav>
   </header>
 
   <!-- HERO SECTION -->
   <section id="hero">
-    <h1>Discover Playful & Elegant Hijabs 🌸✨</h1>
-    <p>Shop our exclusive collection today! 💖</p>
-    <a href="shop.html" class="cta-button">🛍️ Shop Now</a>
+    <div class="hero-content">
+      <h1>Discover Playful & Elegant Hijabs</h1>
+      <p>Shop our exclusive collection today!</p>
+      <a href="shop.html" class="cta-button">Shop Now</a>
+    </div>
   </section>
 
   <!-- FEATURED PRODUCTS -->
   <section id="featured-products">
-    <h2>Featured Hijabs 🌟</h2>
+    <h2>Featured Hijabs</h2>
     <div class="product-grid" id="product-grid">
-      <!-- Products loaded dynamically from js/main.js -->
+      <!-- Products will be dynamically loaded from JSON -->
     </div>
+    <div class="view-all">
+      <a href="shop.html" class="cta-button">View All Products</a>
+    </div>
+  </section>
+
+  <!-- ABOUT PREVIEW -->
+  <section id="about-preview">
+    <h2>About HijabStore</h2>
+    <p>Our mission is to provide high-quality, stylish hijabs that empower women to express themselves confidently. Playful, elegant, and perfect for any occasion.</p>
+    <a href="about.html" class="cta-button">Learn More</a>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 HijabStore. All rights reserved. 💕</p>
+    <p>&copy; 2025 HijabStore. All rights reserved.</p>
     <div class="social-buttons">
-      <a href="https://instagram.com/khadijamuhammadaliyu6?igsh=ZGUzMzM3NWJiOQ==" target="_blank">📸 Instagram</a>
-      <a href="https://www.tiktok.com/@babyhadiza46?_t=ZS-8zgyGuoSfD8&_r=1" target="_blank">🎵 TikTok</a>
-      <a href="https://wa.me/2348147616483" target="_blank" class="whatsapp-button">📱 WhatsApp</a>
+      <a href="https://instagram.com/" target="_blank">Instagram</a>
+      <a href="https://facebook.com/" target="_blank">Facebook</a>
+      <a href="https://tiktok.com/" target="_blank">TikTok</a>
     </div>
   </footer>
 
+  <!-- JS -->
   <script src="js/main.js"></script>
+
 </body>
 </html>
